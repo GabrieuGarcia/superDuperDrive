@@ -1,40 +1,32 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Login;
-import com.udacity.jwdnd.course1.cloudstorage.services.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.udacity.jwdnd.course1.cloudstorage.model.User;
+import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
 
-    @Autowired
-    private LoginService loginService;
+    private final UserService userService;
 
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
     }
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView getLoginPage() {
-//        ModelAndView modelAndView = new ModelAndView("login");
-//        modelAndView.addObject("login", new LoginForm());
-//        return modelAndView;
-//    }
-
-        @RequestMapping(value = "/login", method = RequestMethod.GET)
-        public String getLoginPage() {
+    @RequestMapping("/login")
+    public String getLoginPage() {
         return "login";
+    }
+
+    @PostMapping
+    public String login(@ModelAttribute("user") User user) {
+        User userFound = userService.getUser(user.getUsername());
+        if(userFound!= null) {
+            return "home";
         }
-
-
-        @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String sendLoginPage(@ModelAttribute(value="login")Login login, Model model) {
-        loginService.login(login);
-        return "login";
+        return "Login";
     }
-
 }

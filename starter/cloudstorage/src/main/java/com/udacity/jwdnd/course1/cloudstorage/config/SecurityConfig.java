@@ -1,36 +1,24 @@
 package com.udacity.jwdnd.course1.cloudstorage.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    private AuthenticationService authenticationService;
-//
-//    public SecurityConfig(AuthenticationService authenticationService) {
-//        this.authenticationService = authenticationService;
-//    }
+//@Configuration
+//@EnableWebSecurity
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) {
-//        auth.authenticationProvider(this.authenticationService);
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//        .authorizeRequests()
+//        .antMatchers("/","/assets/**", "/users")
+//        .permitAll()
+//        .anyRequest()
+//        .authenticated()
+//        .and()
+//        .formLogin()
+//        .loginPage("/login")
+//        .defaultSuccessUrl("/home")
+//        .permitAll()
+//        .and()
+//        .logout()
+//        .permitAll();
 //    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/signup", "/css/**", "/js/**").permitAll()
-                .anyRequest().authenticated();
-
-        http.formLogin()
-                .loginPage("/login")
-                .permitAll();
-
-        http.formLogin()
-                .defaultSuccessUrl("/chat", true);
-    }
-}
+//}
