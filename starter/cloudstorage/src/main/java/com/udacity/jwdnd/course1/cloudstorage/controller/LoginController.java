@@ -27,6 +27,6 @@ public class LoginController {
         if(userFound!= null) {
             return "home";
         }
-        return "Login";
+        return "login";
     }
 }
